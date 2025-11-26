@@ -1,22 +1,27 @@
+/* Conteneur global */
 .accordeon {
     max-width: 600px;
     margin: 2rem auto;
-    border-radius: 0.5rem;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #f6f6f6;
-    padding: 0.5rem;
 }
 
-/* Tous les <details>, ouverts ou fermés */
+/* Tous les <details> (fermés + ouverts) */
 .accordeon>details {
-    border-radius: 0.5rem;
-    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     margin-bottom: 0.5rem;
     overflow: hidden;
-    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Le summary, zone cliquable */
+/* Style quand le <details> est OUVERT */
+.accordeon>details[open] {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Le <summary> (ligne cliquable) */
 .accordeon>details>summary {
     padding: 0.75rem 1rem;
     cursor: pointer;
@@ -24,16 +29,46 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    user-select: none;
 }
 
-.accordeon>details>summary:hover {
-    background-color: #f0f0f0;
+/* Changement visuel quand le details est ouvert */
+.accordeon>details[open]>summary {
+    color: #1a73e8;
 }
 
-/* Le contenu à l’intérieur (tout sauf le summary) */
+/* Contenu à l’intérieur du details (autre que summary) */
 .accordeon>details>*:not(summary) {
-    padding: 0 1rem 0.75rem;
-    font-size: 0.95rem;
+    padding: 0 1rem 1rem 1rem;
     line-height: 1.5;
+}
+
+.accordeon>details>summary {
+    list-style: none;
+}
+
+.accordeon>details>summary::marker,
+.accordeon>details>summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Triangle CSS avant le texte du summary */
+.accordeon>details>summary::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 0.5rem;
+
+    /* Triangle vers la droite */
+    border-style: solid;
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent #333;
+
+    transition: transform 0.2s ease;
+}
+
+/* Quand le details est ouvert, on "pivote" le triangle */
+.accordeon>details[open]>summary::before {
+    transform: rotate(90deg);
 }
