@@ -1,3 +1,55 @@
 /**
 * Accordeon
 */
+/* Conteneur de l'accordéon */
+.accordeon {
+    max-width: 600px;
+    margin: 2rem auto;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Chaque item de l'accordéon (fermé et ouvert) */
+.accordeon>details {
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+/* Dernier details sans bord du bas si tu veux */
+.accordeon>details:last-child {
+    border-bottom: none;
+}
+/* Le header cliquable */
+.accordeon>details>summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+/* Effet hover */
+.accordeon>details>summary:hover {
+    background-color: #f0f0f0;
+}
+
+/* Contenu interne de chaque details */
+.accordeon>details>*:not(summary) {
+    padding: 0 1.25rem 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* Quand le bloc est ouvert */
+.accordeon>details[open] {
+    background-color: #ffffff;
+}
+
+/* Optionnel : changer la bordure du summary quand c'est ouvert */
+.accordeon>details[open]>summary {
+    border-bottom: 1px solid #eee;
+}
